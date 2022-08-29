@@ -5,7 +5,7 @@ import com.tugalsan.api.log.client.TGC_Log;
 
 public class TGC_SoundWav {
 
-    final private static TGC_Log d = TGC_Log.of(TGC_SoundWav.class.getSimpleName());
+    final private static TGC_Log d = TGC_Log.of(TGC_SoundWav.class);
 
     private final Audio bip;
     private String url;
