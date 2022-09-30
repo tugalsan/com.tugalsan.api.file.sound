@@ -9,7 +9,7 @@ import com.tugalsan.api.unsafe.client.*;
 public class TS_FileSoundUtils {
 
     public static void playSound(Path soundFile) {
-        TS_ThreadRunUtils.now(() -> {
+        TS_ThreadRun.now(() -> {
             TGS_UnSafe.execute(() -> {
                 try ( var inputStream = AudioSystem.getAudioInputStream(soundFile.toFile());) {
                     var clip = AudioSystem.getClip();
