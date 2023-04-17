@@ -10,7 +10,7 @@ public class TS_FileSoundUtils {
 
     public static void playSound(Path soundFile) {
         TS_ThreadRun.now(() -> {
-            TGS_UnSafe.execute(() -> {
+            TGS_UnSafe.run(() -> {
                 try ( var inputStream = AudioSystem.getAudioInputStream(soundFile.toFile());) {
                     var clip = AudioSystem.getClip();
                     clip.open(inputStream);
