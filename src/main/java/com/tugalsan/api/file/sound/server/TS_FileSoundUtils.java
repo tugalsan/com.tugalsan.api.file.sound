@@ -1,6 +1,6 @@
 package com.tugalsan.api.file.sound.server;
 
-import com.tugalsan.api.thread.server.async.TS_ThreadAsync;
+import com.tugalsan.api.thread.server.struct.async.TS_ThreadAsync;
 import java.awt.Toolkit;
 import java.nio.file.Path;
 import javax.sound.sampled.AudioSystem;
