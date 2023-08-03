@@ -1,7 +1,7 @@
 package com.tugalsan.api.file.sound.server;
 
-import com.tugalsan.api.thread.server.safe.TS_ThreadSafeTrigger;
-import com.tugalsan.api.thread.server.struct.TS_ThreadStructBuilder;
+import com.tugalsan.api.thread.server.sync.TS_ThreadSyncTrigger;
+import com.tugalsan.api.thread.server.async.TS_ThreadAsyncBuilder;
 import com.tugalsan.api.unsafe.client.TGS_UnSafe;
 import java.awt.Toolkit;
 import java.nio.file.Path;
@@ -10,8 +10,8 @@ import javax.sound.sampled.Clip;
 
 public class TS_FileSoundUtils {
 
-    public static void playSound(TS_ThreadSafeTrigger killTrigger, Path soundFile) {
-        TS_ThreadStructBuilder.of()//I KNOW
+    public static void playSound(TS_ThreadSyncTrigger killTrigger, Path soundFile) {
+        TS_ThreadAsyncBuilder.of()//I KNOW
                 .init(() -> {
                     return TGS_UnSafe.call(() -> {
                         try (var inputStream = AudioSystem.getAudioInputStream(soundFile.toFile());) {
