@@ -5,7 +5,6 @@ module com.tugalsan.api.file.sound {
     requires com.tugalsan.api.callable;
     requires com.tugalsan.api.validator;
     requires com.tugalsan.api.unsafe;
-    requires com.tugalsan.api.runnable;
     requires com.tugalsan.api.thread;
     exports com.tugalsan.api.file.sound.client;
     exports com.tugalsan.api.file.sound.server;
