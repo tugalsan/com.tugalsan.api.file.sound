@@ -10,8 +10,12 @@ import javax.sound.sampled.Clip;
 
 public class TS_FileSoundUtils {
 
+    private TS_FileSoundUtils() {
+
+    }
+
     public static void playSound(TS_ThreadSyncTrigger killTrigger, Path soundFile) {
-        TS_ThreadAsyncBuilder.of()//I KNOW
+        TS_ThreadAsyncBuilder.<Clip>of(killTrigger)
                 .init(() -> {
                     return TGS_FuncMTCEUtils.call(() -> {
                         try (var inputStream = AudioSystem.getAudioInputStream(soundFile.toFile());) {
@@ -22,11 +26,9 @@ public class TS_FileSoundUtils {
                         }
                     });
                 })
-                .main((kt2, clip) -> {
-                    //I NEED THIS EMPTY RUN
-                })
-                .fin(clip -> ((Clip) clip).stop())
-                .cycle_mainValidation(clip -> clip != null && ((Clip) clip).isRunning() && killTrigger.hasNotTriggered())
+                .mainEmpty()
+                .fin(clip -> clip.stop())
+                .cycle_mainValidation((kt, clip) -> clip != null && clip.isRunning() && kt.hasNotTriggered())
                 .asyncRun();
     }
 
