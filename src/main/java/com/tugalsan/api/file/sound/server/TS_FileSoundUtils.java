@@ -3,6 +3,7 @@ package com.tugalsan.api.file.sound.server;
 import com.tugalsan.api.thread.server.sync.TS_ThreadSyncTrigger;
 import com.tugalsan.api.thread.server.async.builder.TS_ThreadAsyncBuilder;
 import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
+import com.tugalsan.api.log.server.TS_Log;
 import java.awt.Toolkit;
 import java.nio.file.Path;
 import javax.sound.sampled.AudioSystem;
@@ -10,12 +11,15 @@ import javax.sound.sampled.Clip;
 
 public class TS_FileSoundUtils {
 
+    final private static TS_Log d = TS_Log.of(TS_FileSoundUtils.class);
+
     private TS_FileSoundUtils() {
 
     }
 
-    public static void playSound(TS_ThreadSyncTrigger killTrigger, Path soundFile) {
-        TS_ThreadAsyncBuilder.<Clip>of(killTrigger)
+    public static void playSound(String name, TS_ThreadSyncTrigger killTrigger, Path soundFile) {
+        TS_ThreadAsyncBuilder.<Clip>of(killTrigger.newChild(d.className).newChild("playSound"))
+                .name(name)
                 .init(() -> {
                     return TGS_FuncMTCEUtils.call(() -> {
                         try (var inputStream = AudioSystem.getAudioInputStream(soundFile.toFile());) {
