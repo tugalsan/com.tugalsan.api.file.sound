@@ -11,14 +11,17 @@ import javax.sound.sampled.Clip;
 
 public class TS_FileSoundUtils {
 
-    final private static TS_Log d = TS_Log.of(TS_FileSoundUtils.class);
-
     private TS_FileSoundUtils() {
 
     }
 
+    private static TS_Log d() {
+        return d.orElse(TS_Log.of(TS_FileSoundUtils.class));
+    }
+    final private static StableValue<TS_Log> d = StableValue.of();
+
     public static void playSound(String name, TS_ThreadSyncTrigger killTrigger, Path soundFile) {
-        TS_ThreadAsyncBuilder.<Clip>of(killTrigger.newChild(d.className).newChild("playSound"))
+        TS_ThreadAsyncBuilder.<Clip>of(killTrigger.newChild(d().className).newChild("playSound"))
                 .name(name)
                 .init(() -> {
                     return TGS_FuncMTCUtils.call(() -> {
