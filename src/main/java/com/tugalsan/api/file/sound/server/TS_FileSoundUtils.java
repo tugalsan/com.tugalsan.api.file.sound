@@ -6,6 +6,7 @@ import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUt
 import com.tugalsan.api.log.server.TS_Log;
 import java.awt.Toolkit;
 import java.nio.file.Path;
+import java.util.function.Supplier;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
@@ -15,13 +16,10 @@ public class TS_FileSoundUtils {
 
     }
 
-    private static TS_Log d() {
-        return d.orElse(TS_Log.of(TS_FileSoundUtils.class));
-    }
-    final private static StableValue<TS_Log> d = StableValue.of();
+    final private static Supplier<TS_Log> d = StableValue.supplier(() -> TS_Log.of(TS_FileSoundUtils.class));
 
     public static void playSound(String name, TS_ThreadSyncTrigger killTrigger, Path soundFile) {
-        TS_ThreadAsyncBuilder.<Clip>of(killTrigger.newChild(d().className).newChild("playSound"))
+        TS_ThreadAsyncBuilder.<Clip>of(killTrigger.newChild(d.get().className).newChild("playSound"))
                 .name(name)
                 .init(() -> {
                     return TGS_FuncMTCUtils.call(() -> {
