@@ -1,13 +1,10 @@
 package com.tugalsan.api.file.sound.server;
 
-import com.tugalsan.api.thread.server.sync.TS_ThreadSyncTrigger;
-import com.tugalsan.api.thread.server.async.builder.TS_ThreadAsyncBuilder;
-import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUtils;
-import com.tugalsan.api.log.server.TS_Log;
-import java.awt.Toolkit;
-import java.nio.file.Path;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import module com.tugalsan.api.thread;
+import module com.tugalsan.api.function;
+import module com.tugalsan.api.log;
+import module java.desktop;
+import java.nio.file.*;
 
 public class TS_FileSoundUtils {
 
